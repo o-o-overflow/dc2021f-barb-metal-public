@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<pre id="log"></pre>
+<script>
+  // helper function: log message to screen
+  function log(msg) {
+    document.getElementById('log').textContent += msg + '\n';
+  }
+
+  // setup websocket with callbacks
+  var ws = new WebSocket('ws://localhost:8080/');
+  ws.onopen = function() {
+    log('CONNECT');
+  };
+  ws.onclose = function() {
+    log('DISCONNECT');
+  };
+  ws.onmessage = function(event) {
+	  if (event.data == "welcome to barbOS...") {
+		  ws.send("QUxBUk0gaW5mbw==\n")
+		  ws.send("VEhFUk0gc2V0IGRheSAtMjQ4IDEyOA==\n")
+		  ws.send("VEhFUk0gc2V0IG5pZ2h0IC0yNDggMTg=\n")
+		  ws.send("VEhFUk0gc2V0IGRheSAtMjQ3ICAyMA==\n")
+		  ws.send("QUxBUk0gaW5mbw==\n")
+	  }
+    log('MESSAGE: ' + event.data);
+  };
+</script>

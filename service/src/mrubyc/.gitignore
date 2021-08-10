@@ -1,0 +1,26 @@
+# Executables
+sample_scheduler
+sample_include
+sample_concurrent
+sample_myclass
+sample_no_scheduler
+
+# Object files
+*.o
+*.a
+
+# Mruby bytecode
+*.mrb
+
+# backup file
+*~
+
+# sample_ruby
+sample_ruby/**/*.txt
+
+# Mac
+.DS_Store
+*.dSYM
+
+# doxygen output
+html

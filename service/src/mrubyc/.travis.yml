@@ -1,0 +1,16 @@
+language: ruby
+
+addons:
+  apt:
+    packages:
+      - docker-ce
+
+services:
+  - docker
+
+before_install:
+  - make setup_test
+
+script:
+  - make test
+

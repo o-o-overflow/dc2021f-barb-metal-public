@@ -1,0 +1,15 @@
+#!/bin/bash
+/schitzo 300 \
+/rf /flag /payload.bin | \
+/schitzo 300 \
+/killondisconnect \
+/usr/bin/qemu-system-i386 \
+  -display none \
+  -monitor none \
+  -no-reboot \
+  -nodefaults -snapshot \
+  -chardev stdio,id=char0,mux=off,signal=off -serial chardev:char0 \
+  -sandbox on,obsolete=deny,elevateprivileges=deny,spawn=deny,resourcecontrol=deny \
+  -m 64M \
+  -kernel /service \
+  $EXTRA_QEMU_FLAGS

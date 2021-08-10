@@ -1,0 +1,35 @@
+name: Test
+
+on: [push]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    - name: Install the tester's own dependencies
+      run: |
+        python -m pip install --upgrade pip setuptools
+        pip install PyYAML
+    - name: Prefetch ubuntu's image
+      run: docker pull ubuntu
+
+    - name: Clone dcf-game-infrastructure
+      uses: actions/checkout@v2
+      with:
+        repository: o-o-overflow/dcf-game-infrastructure
+        path: dcf-game-infrastructure
+        ssh-key: ${{ secrets.DEPLOY_KEY_FOR_DCF_GAME_INFRA }}
+
+    - name: Install ooogame
+      run: cd dcf-game-infrastructure && pip install -e .
+
+    - name: Run the tests
+      run: ./tester

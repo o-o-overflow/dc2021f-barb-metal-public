@@ -1,0 +1,5 @@
+#!/bin/bash
+/usr/sbin/xinetd -filelog /dev/stderr -dontfork -f /service.conf &
+while [[ true ]]; do
+	/schitzo 300 /usr/bin/ruby -C /barb-web s.rb;
+done
